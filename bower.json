@@ -1,0 +1,24 @@
+{
+  "name": "webcams",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+  },
+  "authors": [
+    "Stefan <ducdebreme@early-dance.de>"
+  ],
+  "description": "",
+  "main": "app/scripts/main.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
