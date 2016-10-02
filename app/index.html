@@ -27,9 +27,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBthdOb9B7nFqwrezl9SLoJBvdZACm8FUk&callback=initMap" async defer></script>
   <script type="text/template" class="template" id="popup">
     <div class="popup">
-      <strong><%= cam.title %></strong>
+      <strong><%= prop %> <%= cam.title %></strong>
       <div><a href="<%= cam.url.current.desktop %>" target="_new">
-      <img src="<%= cam.image.current.preview %>" srcset="<%= cam.image.current.preview %> 2x" alt="" /></a>
+        <img src="<%= cam.image.current.preview %>" srcset="<%= cam.image.current.preview %> 2x" alt="" /></a>
       </div>
     </div>
   </script>

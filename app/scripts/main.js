@@ -70,6 +70,7 @@ function initMap() {
 	  		new google.maps.Size(size.width/4, size.height/4)
 			);
 
+	  	// add icon marker
 		  var marker = new google.maps.Marker({
 		    position: { 
 		    	lng: cam.location.longitude,
@@ -80,8 +81,9 @@ function initMap() {
 		    icon: image
 		  });
 
+		  var property = _.isEmpty(cam.property) ? '' : '(' + _.pluck(cam.property,'name').join(', ') + ')';
 			var infowindow = new google.maps.InfoWindow({
-		    content: infowindow_template({cam: cam})
+		    content: infowindow_template({cam: cam, prop: property})
 		  });
 
 		  marker.addListener('click', function() {
