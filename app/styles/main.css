@@ -21,3 +21,7 @@ html, body {
 #map {
   height: 800px;
 }
+
+.popup {
+  max-width: 200px;
+}
