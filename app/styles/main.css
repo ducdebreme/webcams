@@ -25,3 +25,18 @@ html, body {
 .popup {
   max-width: 200px;
 }
+
+.imgcontainer {
+  position: relative;
+}
+
+.imgcontainer .note {
+  position: absolute;
+  background-color: orange;
+  right: 10px;
+  top: 10px;
+}
+
+.imgcontainer img {
+  /*width: 100%;*/
+}
