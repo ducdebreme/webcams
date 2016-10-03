@@ -1,4 +1,10 @@
 // vue.js
+
+function get_property(cam) {
+  return _.isEmpty(cam.property) ? '' : '(' + _.pluck(cam.property, 'name').join(', ') + ')';
+}
+
+
 var vue;
 vue = new Vue({
   el: '#vue',
@@ -38,7 +44,6 @@ function initMap() {
     var sw = bounds.getSouthWest();
 
     var args = [ne.lat(), ne.lng(), sw.lat(), sw.lng()];
-    console.log(args);
 
     $.ajax({
       url: 'https://webcamstravel.p.mashape.com/webcams/list/bbox=' + args.join(',') + '/limit=40',
@@ -52,7 +57,6 @@ function initMap() {
       },
       dataType: 'json',
       success: function (data) {
-        console.log('succes XXX: ');
         console.log(data.result);
         if (data.status == 'OK') {
           webcams = data.result.webcams;
@@ -63,6 +67,7 @@ function initMap() {
     });
 
   }, 500);
+
 
   var update_cams = function () {
     // delete previous markers
@@ -95,7 +100,7 @@ function initMap() {
         icon: image
       });
 
-      var property = _.isEmpty(cam.property) ? '' : '(' + _.pluck(cam.property, 'name').join(', ') + ')';
+      var property = get_property(cam);
       var infowindow = new google.maps.InfoWindow({
         content: infowindow_template({cam: cam, prop: property})
       });
