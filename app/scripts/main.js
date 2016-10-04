@@ -13,7 +13,7 @@ vue = new Vue({
   },
   data: {
     test: 'hallo',
-    result: {}
+    webcams: {}
   }
 });
 
@@ -30,7 +30,7 @@ var coords = {
 
 var map;
 function initMap() {
-  var markers = [], webcams = [];
+  var markers = {}, webcams = {};
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: coords,
@@ -59,9 +59,9 @@ function initMap() {
       success: function (data) {
         console.log(data.result);
         if (data.status == 'OK') {
-          webcams = data.result.webcams;
-          update_cams();
-          vue.result = data.result;
+          data.result.webcams;
+          add_webcams(data.result.webcams);
+          vue.webcams = webcams;
         }
       }
     });
@@ -69,47 +69,43 @@ function initMap() {
   }, 500);
 
 
-  var update_cams = function () {
-    // delete previous markers
-    if (!_.isEmpty(markers)) {
-      _.each(markers, function (marker) {
-        marker.setMap(null);
-      })
-      console.log('deleted');
-    }
+  var add_webcams = function (cams) {
 
     // attach cam images
-    markers = _.map(webcams, function (cam) {
+    _.each(cams, function (cam) {
+      webcams[cam.id] = cam;
 
-      var icon_size = 'thumbnail';
-      var size = cam.image.sizes[icon_size];
+      if( !_.has(markers, cam.id)) {
+        var icon_size = 'thumbnail';
+        var size = cam.image.sizes[icon_size];
 
-      var image = new google.maps.MarkerImage(
-        cam.image.current[icon_size], null, null, null,
-        new google.maps.Size(size.width / 4, size.height / 4)
-      );
+        var image = new google.maps.MarkerImage(
+          cam.image.current[icon_size], null, null, null,
+          new google.maps.Size(size.width / 4, size.height / 4)
+        );
 
-      // add icon marker
-      var marker = new google.maps.Marker({
-        position: {
-          lng: cam.location.longitude,
-          lat: cam.location.latitude
-        },
-        map: map,
-        title: cam.title,
-        icon: image
-      });
+        // add icon marker
+        var marker = new google.maps.Marker({
+          position: {
+            lng: cam.location.longitude,
+            lat: cam.location.latitude
+          },
+          map: map,
+          title: cam.title,
+          icon: image
+        });
 
-      var property = get_property(cam);
-      var infowindow = new google.maps.InfoWindow({
-        content: infowindow_template({cam: cam, prop: property})
-      });
+        var property = get_property(cam);
+        var infowindow = new google.maps.InfoWindow({
+          content: infowindow_template({cam: cam, prop: property})
+        });
 
-      marker.addListener('click', function () {
-        infowindow.open(map, marker);
-      });
+        marker.addListener('click', function () {
+          infowindow.open(map, marker);
+        });
 
-      return marker;
+        markers[cam.id] = marker;
+      }
     });
     console.log(markers.length);
   }
@@ -122,3 +118,13 @@ function initMap() {
 }
 
 
+function resizeBootstrapMap() {
+  var mapParentWidth = $('#mapContainer').width();
+  $('#map').width(mapParentWidth);
+  $('#map').height(3 * mapParentWidth / 4);
+  google.maps.event.trigger($('#map','resize');
+  console.log(mapParentWidth);
+}
+
+// resize the map whenever the window resizes
+$(window).resize(resizeBootstrapMap);
