@@ -12,7 +12,7 @@
     "Stefan <ducdebreme@early-dance.de>"
   ],
   "description": "",
-  "main": "app/scripts/main.js",
+  "main": "app/index.html",
   "license": "MIT",
   "homepage": "",
   "ignore": [
@@ -21,5 +21,13 @@
     "bower_components",
     "test",
     "tests"
-  ]
-}
+  ],
+  "overrides":{
+    "bootstrap" : {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }}
