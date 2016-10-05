@@ -31,6 +31,10 @@ html, body {
   max-width: 100%;
 }
 
+.tile img {
+  max-width: 100%;
+}
+
 .imgcontainer {
   position: relative;
 }

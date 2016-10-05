@@ -34,17 +34,11 @@
 
   <div id="vue">
       <div class="row">
-        <row class="col-md-2 col-xs-6">col</row>
-        <row class="col-md-2 col-xs-6">col</row>
-        <row class="col-md-2 col-xs-6">col</row>
-        <row class="col-md-2 col-xs-6">col</row>
-        <row class="col-md-2 col-xs-6">col</row>
-        <row class="col-md-2 col-xs-6">col</row>
-        <row v-for="(i, cam) in webcams" class="col-md-2 col-xs-6">
+        <div v-for="(i, cam) in webcams" class="col-md-2 col-xs-6 tile">
           <a href="{{cam.url.current.desktop}}" target="_new">
-            <img v-bind:src="cam.image.current.thumbnail" alt="{{cam.image.current.thumbnail}}" >
+            <img v-bind:src="cam.image.current.preview" alt="{{cam.image.current.thumbnail}}" >
           </a>
-        </row>
+        </div>
       </div>
   </div>
 
