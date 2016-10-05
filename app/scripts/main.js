@@ -122,7 +122,7 @@ function resizeBootstrapMap() {
   var mapParentWidth = $('#mapContainer').width();
   $('#map').width(mapParentWidth);
   $('#map').height(3 * mapParentWidth / 4);
-  google.maps.event.trigger($('#map','resize');
+  google.maps.event.trigger($('#map','resize'));
   console.log(mapParentWidth);
 }
 
